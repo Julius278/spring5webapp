@@ -11,6 +11,8 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.OneToMany;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 @Entity
 public class Publisher {
 
@@ -24,6 +26,7 @@ public class Publisher {
 	private String state;
 	private String zip;
 
+	@JsonIgnore
 	@OneToMany
 	@JoinColumn(name = "publisher_id")
 	private Set<Book> books = new HashSet<>();
@@ -111,7 +114,7 @@ public class Publisher {
 	@Override
 	public String toString() {
 		return "Publisher [id=" + id + ", name=" + name + ", addressLine1=" + addressLine1 + ", city=" + city
-				+ ", state=" + state + ", zip=" + zip + ", books=" + books + "]";
+				+ ", state=" + state + ", zip=" + zip + "]";
 	}
 
 }

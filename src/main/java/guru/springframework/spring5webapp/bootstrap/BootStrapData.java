@@ -59,6 +59,26 @@ public class BootStrapData implements CommandLineRunner {
         authorRepository.save(rod);
         bookRepository.save(noEJB);
         publisherRepository.save(publisher);
+        
+        Publisher pub = new Publisher();
+        pub.setName("Julius Publish");
+        pub.setCity("Frankfurt");
+        pub.setState("GER");
+        
+        publisherRepository.save(pub);
+        
+        Author a = new Author("Julius", "L");
+        Book b = new Book("some stuff in a book", "3672390173");
+        
+        b.getAuthors().add(a);
+        a.getBooks().add(b);
+        
+        b.setPublisher(pub);
+        pub.getBooks().add(b);
+
+        authorRepository.save(a);
+        bookRepository.save(b);
+        publisherRepository.save(pub);
 
         System.out.println("Number of Books: " + bookRepository.count());
         System.out.println("Publisher Number of Books: " + publisher.getBooks().size());

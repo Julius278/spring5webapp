@@ -11,6 +11,9 @@ import javax.persistence.Id;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import javax.persistence.JoinColumn;
 
 @Entity
@@ -23,6 +26,7 @@ public class Book {
 	private String title;
 	private String isbn;
 
+	@JsonIgnore
 	@ManyToMany
 	@JoinTable(name = "author_book", joinColumns = @JoinColumn(name = "book_id"), inverseJoinColumns = @JoinColumn(name = "author_id"))
 	private Set<Author> authors = new HashSet<>();
@@ -97,7 +101,7 @@ public class Book {
 
 	@Override
 	public String toString() {
-		return "Book [id=" + id + ", title=" + title + ", isbn=" + isbn + ", authors=" + authors + ", publisher="
+		return "Book [id=" + id + ", title=" + title + ", isbn=" + isbn + ", publisher="
 				+ publisher + "]";
 	}
 
